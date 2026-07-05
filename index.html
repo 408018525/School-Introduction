@@ -289,9 +289,152 @@
       *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; }
       #trail-canvas { display:none; }
     }
+
+    /* 登录与自定义人机验证 */
+    .login-overlay { position:fixed; inset:0; z-index:999999; display:flex; align-items:center; justify-content:center; padding:24px; background:rgba(255,255,255,.96); backdrop-filter:blur(14px); }
+    .login-panel { width:min(370px,100%); padding:34px 34px 30px; border:1px solid rgba(22,50,58,.14); border-radius:28px; background:rgba(255,255,255,.95); box-shadow:0 18px 54px rgba(22,50,58,.13); color:var(--ink-strong); }
+    .login-brand { text-align:center; margin:0 0 22px; font-size:28px; font-weight:700; letter-spacing:-.06em; color:#10191b; }
+    .login-panel h1 { margin:0; font-family:"Noto Serif SC", Georgia, serif; font-size:29px; line-height:1.18; letter-spacing:-.06em; }
+    .login-subtitle { margin:5px 0 18px; color:var(--muted); font-size:12px; }
+    .login-field { display:block; margin-top:12px; }
+    .login-field > span { display:block; margin-bottom:7px; color:#4f6067; font-size:12px; }
+    .login-field input { width:100%; min-height:42px; padding:0 14px; border:1px solid rgba(22,50,58,.22); border-radius:14px; outline:none; background:#fff; color:var(--ink-strong); font:13px "DM Sans","PingFang SC",sans-serif; transition:border-color .16s ease,box-shadow .16s ease; }
+    .login-field input::placeholder { color:#9aa4a8; }
+    .login-field input:focus { border-color:var(--teal); box-shadow:0 0 0 3px rgba(45,138,130,.12); }
+    .human-check { width:100%; min-height:58px; display:flex; align-items:center; gap:12px; margin-top:14px; padding:10px 12px; border:1px solid rgba(22,50,58,.22); border-radius:14px; background:#fff; text-align:left; color:var(--ink-strong); cursor:pointer; transition:border-color .16s ease,background .16s ease,transform .16s ease; }
+    .human-check:hover:not(:disabled) { border-color:rgba(22,50,58,.44); background:#fbfdfd; transform:translateY(-1px); }
+    .human-check:focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
+    .human-check.is-verifying { cursor:wait; }
+    .captcha-box { position:relative; flex:0 0 27px; width:27px; height:27px; display:grid; place-items:center; border:1.5px solid #9aa5a7; border-radius:5px; background:#fff; overflow:hidden; }
+    .captcha-spinner { display:none; width:17px; height:17px; border:2px solid rgba(45,138,130,.22); border-top-color:var(--teal-dark); border-right-color:var(--teal); border-radius:50%; }
+    .captcha-check { display:none; color:#fff; font-size:18px; line-height:1; font-weight:700; }
+    .human-check.is-verifying .captcha-spinner { display:block; animation:captcha-rotate var(--captcha-duration,1.2s) linear infinite; }
+    .human-check.is-success .captcha-box { border-color:var(--teal); background:var(--teal); }
+    .human-check.is-success .captcha-check { display:block; }
+    .human-check.is-failed .captcha-box { border-color:#b94545; background:#fff; }
+    .human-check.is-failed .captcha-box::after { content:'×'; color:#b94545; font-size:23px; line-height:1; }
+    .captcha-copy { flex:1; font-size:14px; font-weight:600; }
+    .captcha-side { display:grid; justify-items:center; gap:2px; color:#7b878a; }
+    .captcha-side small { font:7px/1 "DM Mono",monospace; letter-spacing:.06em; white-space:nowrap; }
+    .captcha-orbit { width:19px; height:19px; position:relative; display:block; border:1.3px solid #7a888b; border-radius:50%; }
+    .captcha-orbit::before,.captcha-orbit::after { content:''; position:absolute; background:#7a888b; }
+    .captcha-orbit::before { width:4px; height:4px; border-radius:50%; left:2px; top:3px; }
+    .captcha-orbit::after { width:5px; height:5px; right:1px; bottom:2px; border-radius:1px; }
+    .captcha-status { min-height:19px; margin:6px 0 3px 39px; color:#718187; font-size:12px; }
+    .captcha-status.success { color:var(--teal-dark); }
+    .captcha-status.failed { color:#b94545; }
+    .login-agreement { display:flex; align-items:center; gap:8px; margin:7px 0 18px; color:#53636a; font-size:12px; }
+    .login-agreement input { width:16px; height:16px; accent-color:var(--teal-dark); cursor:pointer; }
+    .login-agreement label { cursor:pointer; }
+    .login-agreement-link { padding:0; border:0; border-bottom:1px solid currentColor; background:transparent; color:#243f46; font:inherit; line-height:1.25; cursor:pointer; }
+    .login-agreement-link:hover { color:var(--teal-dark); }
+    .login-agreement-link:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+    .login-agreement-modal { position:fixed; inset:0; z-index:1000001; display:none; place-items:center; padding:20px; background:rgba(13,33,38,.58); backdrop-filter:blur(8px); }
+    .login-agreement-modal.active { display:grid; }
+    .login-agreement-panel { width:min(760px,100%); max-height:min(760px,calc(100vh - 40px)); display:flex; flex-direction:column; overflow:hidden; border:1px solid rgba(255,255,255,.78); border-radius:24px; background:#fbfcfb; box-shadow:0 32px 90px rgba(0,0,0,.30); color:var(--ink-strong); }
+    .login-agreement-head { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; padding:24px 26px 20px; border-bottom:1px solid rgba(22,50,58,.12); }
+    .login-agreement-kicker { margin:0; color:var(--teal-dark); font:11px "DM Mono",monospace; letter-spacing:.12em; }
+    .login-agreement-head h2 { margin:7px 0 0; font-family:"Noto Serif SC",Georgia,serif; font-size:clamp(25px,4vw,36px); line-height:1.22; letter-spacing:-.055em; }
+    .login-agreement-scroll { overflow:auto; padding:24px 26px 30px; }
+    .login-agreement-scroll .agreement-note { margin:0 0 20px; padding:14px 16px; border-radius:14px; background:rgba(45,138,130,.08); border:1px solid rgba(45,138,130,.14); color:#476069; font-size:13px; line-height:1.75; }
+    .login-agreement-scroll h3 { margin:25px 0 8px; color:var(--teal-dark); font-size:15px; }
+    .login-agreement-scroll p { margin:0 0 10px; color:#55666e; font-size:14px; line-height:1.85; }
+    .login-agreement-foot { display:flex; justify-content:flex-end; gap:10px; padding:16px 26px; border-top:1px solid rgba(22,50,58,.12); background:#fff; }
+    .login-agreement-close { min-height:42px; padding:0 18px; border:1px solid rgba(22,50,58,.22); border-radius:12px; background:#fff; color:var(--ink-strong); font-weight:700; cursor:pointer; }
+    .login-agreement-close:hover { border-color:var(--teal-dark); color:var(--teal-dark); }
+    .login-agreement-close:focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
+    @media (max-width:480px) { .login-agreement-modal { padding:10px; } .login-agreement-panel { max-height:calc(100vh - 20px); border-radius:20px; } .login-agreement-head,.login-agreement-scroll,.login-agreement-foot { padding-left:18px; padding-right:18px; } }
+    .login-button { width:100%; min-height:46px; border:0; border-radius:999px; background:#b7bec0; color:#fff; font-weight:700; letter-spacing:.04em; cursor:not-allowed; transition:background .18s ease,transform .18s ease,box-shadow .18s ease; }
+    .login-button:not(:disabled) { background:linear-gradient(135deg,#48a8e8,#1e66eb); cursor:pointer; box-shadow:0 10px 22px rgba(30,102,235,.24); }
+    .login-button:not(:disabled):hover { transform:translateY(-1px); box-shadow:0 13px 28px rgba(30,102,235,.3); }
+    .login-error { min-height:18px; margin:8px 0 0; color:#b94545; font-size:12px; text-align:center; }
+    @keyframes captcha-rotate { to { transform:rotate(360deg); } }
+    @media (max-width:480px) { .login-overlay { padding:16px; } .login-panel { padding:28px 24px 24px; border-radius:24px; } }
+
   </style>
 </head>
 <body>
+<!-- LOGIN OVERLAY START -->
+<div id="login-overlay" class="login-overlay" role="dialog" aria-modal="true" aria-labelledby="login-title">
+  <div class="login-panel">
+    <div class="login-brand">Flore</div>
+    <h1 id="login-title">账号登录</h1>
+    <p class="login-subtitle"></p>
+
+    <label class="login-field" for="u">
+      <span>账号 / 手机号</span>
+      <input id="u" autocomplete="username" placeholder="请输入账号或手机号" />
+    </label>
+
+    <label class="login-field" for="p">
+      <span>密码</span>
+      <input id="p" type="password" autocomplete="current-password" placeholder="请输入密码" />
+    </label>
+
+    <button id="captcha" class="human-check" type="button" aria-describedby="captchaStatus" aria-pressed="false">
+      <span id="captchaBox" class="captcha-box" aria-hidden="true"><span id="captchaSpinner" class="captcha-spinner"></span><span id="captchaCheck" class="captcha-check">✓</span></span>
+      <span class="captcha-copy">验证你是人类</span>
+      <span class="captcha-side" aria-hidden="true"><span class="captcha-orbit"></span><small>HUMAN CHECK</small></span>
+    </button>
+    <p id="captchaStatus" class="captcha-status" aria-live="polite"></p>
+
+    <div class="login-agreement">
+      <input id="loginAgreement" type="checkbox" checked>
+      <label for="loginAgreement">我已阅读并同意</label>
+      <button class="login-agreement-link" type="button" aria-haspopup="dialog" aria-controls="login-agreement-modal" onclick="openLoginAgreement(event)">服务协议</button>
+    </div>
+    <button id="loginBtn" class="login-button" type="button" disabled onclick="login()">登录</button>
+    <p id="err" class="login-error" aria-live="polite"></p>
+  </div>
+</div>
+
+<div id="login-agreement-modal" class="login-agreement-modal" role="dialog" aria-modal="true" aria-labelledby="login-agreement-title" aria-hidden="true">
+  <div class="login-agreement-panel" role="document">
+    <div class="login-agreement-head">
+      <div>
+        <p class="login-agreement-kicker">FLORE / SERVICE AGREEMENT</p>
+        <h2 id="login-agreement-title">页面访问服务协议</h2>
+      </div>
+      <button class="close" type="button" onclick="closeLoginAgreement()" aria-label="关闭服务协议">×</button>
+    </div>
+    <div class="login-agreement-scroll">
+      <p class="agreement-note">本协议适用于进入本页面前的访问验证与后续浏览行为。本页面由一名市桥中心小学毕业生个人整理制作，仅用于学校介绍、数字模型展示与网页交互演示，不代表学校官方立场或正式服务。</p>
+      <h3>1. 页面访问说明</h3>
+      <p>请勿在输入框中填写错误信息</p>
+      <h3>2. 内容性质与使用边界</h3>
+      <p>页面所展示的学校简介、课程、沿革、荣誉、校园生活及相关资料仅供一般交流参考。学校的招生、学位、收费、校务通知、师生管理、活动报名、校园安全及其他正式事项，应以学校或教育主管部门的官方发布和正式渠道为准。</p>
+      <h3>3. 数字模型与交互内容</h3>
+      <p>页面中的校园数字模型、光迹交互、动画和前端展示仅供浏览体验。受上传体积限制，当前模型清晰度可能有所压缩；如需了解原始模型，请通过“联系作者”区域沟通。未经权利人许可，不得擅自抓取、下载、复制、镜像、反向工程、篡改、商业使用或干扰相关资源和服务。</p>
+      <h3>4. 个人信息与本地设置</h3>
+      <p>页面不设置真实用户账户体系，不主动收集登录账号、密码或验证码内容。为实现基础体验，浏览器可能在本地保存光迹强度、交互开关等偏好设置；您可随时通过浏览器清除缓存或本地存储。通过页面邮箱或外部链接联系作者时，请仅提供与交流必要的信息。</p>
+      <h3>5. 知识产权与文明浏览</h3>
+      <p>页面的代码、版式、交互、原创文字和视觉设计受相应法律保护；学校名称、资料、图片、模型和第三方资源的权利归其对应权利人所有。访问者不得利用页面内容进行恶意攻击、批量爬取、人肉搜索、骚扰、虚假宣传、非法传播或其他侵害学校、师生、未成年人及相关权利人权益的行为。</p>
+      <h3>6. 协议更新与联系</h3>
+      <p>作者可基于页面维护、内容更正或法规要求对本协议进行调整，更新版本在本页面展示后生效。继续使用页面即表示您已知悉并同意本协议。如发现内容错误、版权、隐私或技术问题，请通过页面“联系作者”渠道反馈。</p>
+    </div>
+    <div class="login-agreement-foot">
+      <button class="login-agreement-close" type="button" onclick="closeLoginAgreement(true)">我已阅读并返回登录</button>
+    </div>
+  </div>
+</div>
+<script>
+function login(){
+  const p = document.getElementById('p').value;
+  const verified = document.getElementById('captcha').dataset.verified === 'true';
+  const agreed = document.getElementById('loginAgreement').checked;
+  const err = document.getElementById('err');
+  if (!verified) { err.innerText = '请先完成人机验证'; return; }
+  if (!agreed) { err.innerText = '请先勾选服务协议'; return; }
+  if (p === '202061') {
+    document.getElementById('login-overlay').style.display = 'none';
+    err.innerText = '';
+  } else {
+    err.innerText = '密码错误';
+  }
+}
+</script>
+<!-- LOGIN OVERLAY END -->
+
   <a class="skip-link" href="#main">跳至主要内容</a>
   <canvas id="trail-canvas" aria-hidden="true"></canvas>
 
@@ -489,12 +632,34 @@
       $('.close', policyModal).focus();
     }
     function closePolicy() {
-      policyModal.classList.remove('active'); policyModal.setAttribute('aria-hidden', 'true'); document.body.classList.remove('modal-open');
+      policyModal.classList.remove('active');
+      policyModal.classList.remove('login-policy-layer');
+      policyModal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
       if (previousFocus) previousFocus.focus();
     }
-    window.openPolicy = openPolicy; window.closePolicy = closePolicy;
+    const loginAgreementModal = $('#login-agreement-modal');
+    let loginAgreementPreviousFocus = null;
+    function openLoginAgreement(event) {
+      if (event) { event.preventDefault(); event.stopPropagation(); }
+      loginAgreementPreviousFocus = document.activeElement;
+      loginAgreementModal.classList.add('active');
+      loginAgreementModal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      $('.close', loginAgreementModal)?.focus();
+    }
+    function closeLoginAgreement(markRead = false) {
+      if (!loginAgreementModal.classList.contains('active')) return;
+      loginAgreementModal.classList.remove('active');
+      loginAgreementModal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+      if (markRead) document.getElementById('loginAgreement').checked = true;
+      if (loginAgreementPreviousFocus) loginAgreementPreviousFocus.focus();
+    }
+    window.openPolicy = openPolicy; window.closePolicy = closePolicy; window.openLoginAgreement = openLoginAgreement; window.closeLoginAgreement = closeLoginAgreement;
     policyModal.addEventListener('mousedown', e => { if (e.target === policyModal) closePolicy(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (policyModal.classList.contains('active')) closePolicy(); else if (drawer.classList.contains('active')) closeDrawer(); } });
+    loginAgreementModal.addEventListener('mousedown', e => { if (e.target === loginAgreementModal) closeLoginAgreement(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (loginAgreementModal.classList.contains('active')) closeLoginAgreement(); else if (policyModal.classList.contains('active')) closePolicy(); else if (drawer.classList.contains('active')) closeDrawer(); } });
 
     function openModelFullscreen() {
       const viewport = $('#model-embed-viewport');
@@ -579,5 +744,56 @@
 
     window.addEventListener('load', () => setTimeout(() => $('#loading-screen').classList.add('done'), 650));
   </script>
+
+<script>
+(() => {
+  const captcha = document.getElementById('captcha');
+  const box = document.getElementById('captchaBox');
+  const spinner = document.getElementById('captchaSpinner');
+  const status = document.getElementById('captchaStatus');
+  const button = document.getElementById('loginBtn');
+  const error = document.getElementById('err');
+  let verifying = false;
+
+  function setStatus(message, state = '') {
+    status.textContent = message;
+    status.className = `captcha-status ${state}`;
+  }
+
+  captcha.addEventListener('click', () => {
+    if (verifying || captcha.dataset.verified === 'true') return;
+    verifying = true;
+    error.textContent = '';
+    captcha.classList.remove('is-failed');
+    captcha.classList.add('is-verifying');
+    captcha.setAttribute('aria-pressed', 'mixed');
+    const duration = Math.round(500 + Math.random() * 4500);
+    captcha.style.setProperty('--captcha-duration', `${Math.max(320, Math.round(duration / 5))}ms`);
+    setStatus('验证中…');
+
+    window.setTimeout(() => {
+      const passed = Math.random() < 0.60;
+      captcha.classList.remove('is-verifying');
+      verifying = false;
+      if (passed) {
+        captcha.dataset.verified = 'true';
+        captcha.classList.remove('is-failed');
+        captcha.classList.add('is-success');
+        captcha.setAttribute('aria-pressed', 'true');
+        button.disabled = false;
+        setStatus('成功', 'success');
+      } else {
+        captcha.dataset.verified = 'false';
+        captcha.classList.remove('is-success');
+        captcha.classList.add('is-failed');
+        captcha.setAttribute('aria-pressed', 'false');
+        button.disabled = true;
+        setStatus('失败', 'failed');
+      }
+    }, duration);
+  });
+})();
+</script>
 </body>
+
 </html>
