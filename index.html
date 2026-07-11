@@ -215,11 +215,6 @@
     .drawer nav { display:grid; gap:4px; margin-top:20px; }
     .drawer nav a { padding:13px 0; border-bottom:1px solid rgba(22,50,58,.1); font-family:"Noto Serif SC", Georgia,serif; font-size:27px; letter-spacing:-.05em; transition:color .16s ease, padding-left .16s ease; }
     .drawer nav a:hover { color:var(--teal-dark); padding-left:8px; }
-    .tune { margin-top:24px; padding:18px; border-radius:18px; border:1px solid rgba(22,50,58,.1); background:rgba(255,255,255,.72); }
-    .tune label { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; font-size:12px; font-weight:700; }
-    .tune output { font:11px "DM Mono", monospace; color:var(--teal-dark); }
-    .tune input { width:100%; accent-color:var(--teal-dark); }
-    .tune-note { margin:12px 0 0; font-size:11px; line-height:1.65; color:var(--muted); }
 
     .policy-modal { display:none; place-items:center; padding:20px; background:rgba(13,33,38,.56); backdrop-filter:blur(8px); }
     .policy-modal.active { display:grid; }
@@ -431,9 +426,7 @@
         <div class="container">
           <div class="contact-grid">
             <article class="contact-intro"><p class="eyebrow">MORE ABOUT THE SCHOOL</p><h2>如需了解更多，<br>欢迎联系我。</h2><p>本页由一名市桥中心小学毕业生个人整理制作，用于学校介绍与网页交互展示；内容仅供交流参考，不作为学校官方通知或办事依据。</p><ul class="contact-facts"><li><i>✦</i><span>广东省广州市番禺区康乐路 51 号</span></li><li><i>✦</i><span>公办小学教育</span></li><li><i>✦</i><span>关注每一位学生成长</span></li></ul></article>
-            <article class="contact-card"><p class="eyebrow">CONTACT / AUTHOR</p><h3>联系作者<br>（一名中心毕业生）</h3><div class="contact-links"><a class="contact-link" href="mailto:408018525@qq.com"><span>408018525@qq.com</span><b>↗</b></a><a class="contact-link" href="https://github.com/408018525/School-Introduction
-" target="_blank" rel="noopener"><span>github.com/408018525/School-Introduction
-</span><b>↗</b></a><a class="contact-link" href="https://blog.flore.top/" target="_blank" rel="noopener"><span>https://blog.flore.top/</span><b>↗</b></a></div><button class="copy-button" type="button" onclick="copyEmail()">复制邮箱地址</button><p class="notice">联系渠道属于作者个人，不用于招生、学位、缴费、校园安全或任何需要学校官方处理的事项。</p></article>
+            <article class="contact-card"><p class="eyebrow">CONTACT / AUTHOR</p><h3>联系作者<br>（一名中心毕业生）</h3><div class="contact-links"><a class="contact-link" href="mailto:408018525@qq.com"><span>408018525@qq.com</span><b>↗</b></a><a class="contact-link" href="https://github.com/408018525" target="_blank" rel="noopener"><span>github.com/408018525</span><b>↗</b></a><a class="contact-link" href="https://blog.flore.top" target="_blank" rel="noopener"><span>https://blog.flore.top</span><b>↗</b></a></div><button class="copy-button" type="button" onclick="copyEmail()">复制邮箱地址</button><p class="notice">联系渠道属于作者个人，不用于招生、学位、缴费、校园安全或任何需要学校官方处理的事项。</p></article>
           </div>
         </div>
       </section>
@@ -444,7 +437,7 @@
 
   <div class="drawer" id="site-menu" role="dialog" aria-modal="true" aria-label="网站目录" aria-hidden="true">
     <div class="drawer-backdrop" data-close-drawer></div>
-    <div class="drawer-panel"><div class="drawer-head"><div><div class="drawer-title">CONTENTS / 目录</div><div style="margin-top:6px;font-family:'Noto Serif SC',Georgia,serif;font-size:28px;letter-spacing:-.05em">市桥中心小学</div></div><button class="close" type="button" data-close-drawer aria-label="关闭目录">×</button></div><nav><a href="#about">学校简介 <span>↘</span></a><a href="#model">数字模型 <span>↘</span></a><a href="#heritage">办学沿革 <span>↘</span></a><a href="#programs">课程体系 <span>↘</span></a><a href="#campus">校园生活 <span>↘</span></a><a href="#honors">学校荣誉 <span>↘</span></a><a href="#contact">联系作者 <span>↘</span></a></nav><div class="tune"><label for="trail-strength">校园光迹强度 <output id="trail-value">65%</output></label><input id="trail-strength" type="range" min="0" max="100" value="65" /><p class="tune-note">可随时降低或关闭移动、点击与拖拽的光迹互动。设置仅保存在当前浏览器。</p></div></div>
+    <div class="drawer-panel"><div class="drawer-head"><div><div class="drawer-title">CONTENTS / 目录</div><div style="margin-top:6px;font-family:'Noto Serif SC',Georgia,serif;font-size:28px;letter-spacing:-.05em">市桥中心小学</div></div><button class="close" type="button" data-close-drawer aria-label="关闭目录">×</button></div><nav><a href="#about">学校简介 <span>↘</span></a><a href="#model">数字模型 <span>↘</span></a><a href="#heritage">办学沿革 <span>↘</span></a><a href="#programs">课程体系 <span>↘</span></a><a href="#campus">校园生活 <span>↘</span></a><a href="#honors">学校荣誉 <span>↘</span></a><a href="#contact">联系作者 <span>↘</span></a></nav></div>
   </div>
 
   <div class="policy-modal" id="policy-modal" role="dialog" aria-modal="true" aria-labelledby="policy-title" aria-hidden="true">
@@ -452,7 +445,7 @@
       <section id="privacy-policy"><h3>一、隐私政策</h3><div class="policy-note">本页面由一名市桥中心小学毕业生个人整理制作，用于介绍学校资料、展示网页交互与校园数字模型。它不是学校官方站点，也不提供招生、学位、缴费、投诉或紧急事项受理服务。</div>
       <h4>1. 适用范围与页面定位</h4><p>本政策适用于您访问、浏览、使用本页面及通过页面展示联系方式主动联系作者时可能涉及的信息处理活动。页面主要提供学校概况、课程体系、校园生活、办学沿革、荣誉、数字模型和资料性说明；当前不提供注册登录、在线报名、在线缴费、留言评论、文件上传、问卷收集或账号服务。</p><p>您从本页面跳转至 GitHub、外部网站、模型页面、浏览器插件页面或其他第三方服务后，相关服务由其运营者独立提供并适用其自身规则；作者无法控制第三方的内容、可用性或信息处理方式。</p>
       <h4>2. 可能涉及的信息</h4><p>页面不主动收集姓名、手机号码、住址、身份证件、学生信息、家长信息、健康信息或其他敏感个人信息。为保证基础访问，您的浏览器、网络服务商、托管服务或第三方资源可能产生必要的技术日志，例如设备类型、浏览器版本、访问时间、页面请求、IP 地址或错误信息；作者不以建立访客画像、广告投放或数据交易为目的处理该类信息。</p><p>当您通过页面列出的邮箱或外部链接联系作者时，作者可能收到您自愿写入邮件或消息中的姓名、邮箱、联系方式、咨询内容及附件。请勿发送身份证号码、银行卡信息、精确住址、健康病历、未成年人敏感信息、学校内部材料或其他与交流无关的资料。</p>
-      <h4>3. 本地存储、Cookie 与互动效果</h4><p>页面可能使用浏览器本地存储保存光迹交互开关、光迹强度或显示偏好等体验设置。该数据通常保存在您的设备中，并不会由作者主动同步到外部数据库。您可通过浏览器设置清除 Cookie、缓存和本地存储；清除后，相关页面设置可能需要重新选择。</p>
+      <h4>3. Cookie 与互动效果</h4><p>页面的校园光迹开关仅在当前浏览期间生效，不会保存光迹强度设置，也不会由作者主动同步到外部数据库。第三方字体、托管服务或浏览器自身仍可能按照各自规则使用必要的缓存或技术数据。</p>
       <h4>4. 第三方资源与数字模型</h4><p>为完成页面呈现，本站可能加载第三方字体、静态资源、前端技术资源或嵌入式 <code>viewer.html</code> 数字模型。加载此类资源时，您的浏览器可能与相应服务建立网络连接，并由相关服务根据其规则处理必要技术数据。外部网址、GitHub 链接及模型内容仅作为展示或技术参考，不构成作者对第三方服务的担保、推荐、合作承诺或持续可用性保证。</p>
       <h4>5. 未成年人保护与信息反馈</h4><p>本页面可能被未成年人浏览，但不面向未成年人提供注册、交易或资料提交服务。未成年人应在父母或其他监护人指导下使用页面和外部链接。若您发现页面内容可能涉及个人信息、肖像、作品署名或未成年人权益问题，请通过“联系作者”渠道反馈；作者会在合理范围内核查并处理。</p>
       <h4>6. 联系与更正</h4><p>如您对隐私、内容更正、未成年人保护、版权或技术安全有疑问，可使用本页“联系作者”区域展示的邮箱或链接沟通。该联系渠道不等同于学校官方渠道；涉及招生、入学、学位、缴费、校园安全、紧急事项或正式投诉，请直接联系学校或教育主管部门的官方渠道。</p></section>
@@ -537,7 +530,7 @@
     // Canvas trail / bloom interaction, inspired by a generative portfolio interaction but implemented specifically for this school page.
     const canvas = $('#trail-canvas'); const ctx = canvas.getContext('2d');
     let DPR = Math.min(window.devicePixelRatio || 1, 2), W = 0, H = 0, running = true;
-    let strength = Number(localStorage.getItem('shiqiao-trail-strength') || 65);
+    let strength = 65;
     const particles = []; const pointer = { x: -100, y: -100, px: -100, py: -100, active: false, down: false, last: 0 };
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const colors = ['45,138,130','117,185,203','212,154,87','119,88,108'];
@@ -578,10 +571,14 @@
     window.addEventListener('pointerdown', e => { pointer.down = true; pointer.x = e.clientX; pointer.y = e.clientY; addParticle(pointer.x, pointer.y, true, Math.round(16 + strength*.24)); }, { passive:true });
     window.addEventListener('pointerup', () => pointer.down = false, { passive:true });
 
-    const strengthInput = $('#trail-strength'); const strengthOutput = $('#trail-value');
-    function applyStrength(value) { strength = Number(value); strengthInput.value = strength; strengthOutput.value = `${strength}%`; localStorage.setItem('shiqiao-trail-strength', strength); running = strength > 0; canvas.style.opacity = running ? '1' : '0'; }
-    applyStrength(strength); strengthInput.addEventListener('input', e => applyStrength(e.target.value));
-    $('#sound-toggle').addEventListener('click', () => applyStrength(running ? 0 : 65));
+    function setTrailEnabled(enabled) {
+      running = Boolean(enabled);
+      strength = running ? 65 : 0;
+      canvas.style.opacity = running ? '1' : '0';
+      if (!running) particles.length = 0;
+    }
+    setTrailEnabled(true);
+    $('#sound-toggle').addEventListener('click', () => setTrailEnabled(!running));
 
     window.addEventListener('load', () => setTimeout(() => $('#loading-screen').classList.add('done'), 650));
   </script>
